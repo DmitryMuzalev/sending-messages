@@ -1,1 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+:root {
+  //_Font:
+  --f-family: 'Roboto', sans-serif;
+  --fw-bold: 700;
+  --fw-medium: 500;
+  --fw-normal: 400;
+  --fw-light: 300;
+
+  //_Color:
+  --bg-color: #f7f7f7;
+  --black: #000000;
+  --white: #ffffff;
+  --blue: #0055fb;
+  --blue-light: #45a5ff;
+  --red: #ff6666;
+  --green: #03a100;
+  --grey: #949494;
+  --grey-light: #dddddd;
+
+  //_Linear gradients:
+  --blue-gradient: linear-gradient(180deg, #45a6ff 0%, #0055fb 100%);
+  --grey-gradient: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  --black-gradient: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+
+  //_Button backgrounds:
+  --btn-bg: var(--blue-gradient);
+  --btn-hover-bg: var(--grey-gradient), var(--blue-gradient);
+  --btn-active-bg: var(--black-gradient), var(--blue-gradient);
+
+  //_Shadow:
+  --shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+
+  //_Border radius:
+  --radius: 5px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--f-family);
+}
+
+body {
+  padding-top: 2.5rem;
+  font-size: 16px;
+  background-color: var(--bg-color);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 50rem;
+}
+
+/* 
+Для формы:
+
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  background-color: var(--white);
+
+*/

@@ -11,12 +11,14 @@
   //_Color:
   --bg-color: #f7f7f7;
   --black: #000000;
+  --black-light: rgba(0, 0, 0, 0.6);
   --white: #ffffff;
   --blue: #0055fb;
   --blue-light: #45a5ff;
   --red: #ff6666;
   --green: #03a100;
-  --grey: #949494;
+  --grey: #999999;
+  --grey-dark: #949494;
   --grey-light: #dddddd;
 
   //_Linear gradients:
@@ -62,6 +64,18 @@ body {
   flex-direction: column;
   margin: 0 auto;
   width: 50rem;
+}
+
+label {
+  span {
+    display: inline-block;
+    color: var(--black-light);
+    line-height: 1.25rem;
+    margin-bottom: 0.313rem;
+  }
+  div {
+    display: flex;
+  }
 }
 
 /* 

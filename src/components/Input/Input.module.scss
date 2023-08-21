@@ -1,0 +1,39 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.313rem;
+  //!test
+  width: 300px;
+  //!
+  input {
+    font-size: 1.125rem;
+    outline: none;
+    height: 2.5rem;
+    padding: 0 0.625rem;
+    border: 1px solid var(--grey-light);
+    border-radius: var(--radius);
+
+    &[type='text'] {
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+
+    &[type='email'] {
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    &::placeholder {
+      color: var(--grey);
+    }
+    &:focus {
+      border-color: var(--blue-light);
+      box-shadow: inset var(--blue-light) 0px 0px 0px 1px;
+    }
+  }
+
+  &_error {
+    input {
+      border-color: var(--red);
+      box-shadow: inset var(--red) 0px 0px 0px 1px;
+    }
+  }
+}

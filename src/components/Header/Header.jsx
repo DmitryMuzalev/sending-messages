@@ -1,6 +1,10 @@
 function Header() {
   return (
-    <header>
+    <header
+      style={{
+        marginBottom: '1.25rem',
+      }}
+    >
       <img src="./images/logo.svg" alt="Logo" />
     </header>
   );

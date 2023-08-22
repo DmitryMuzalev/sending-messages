@@ -16,10 +16,14 @@
   }
 
   &:focus {
-    box-shadow: var(--blue-light) 0px 0px 0px 2px;
+    outline: 2px solid var(--blue-light);
   }
 
-  &:not([disabled]) {
+  &:not([disabled]):hover {
     background: var(--btn-hover-bg);
+  }
+
+  &:not([disabled]):active {
+    background: var(--btn-active-bg);
   }
 }

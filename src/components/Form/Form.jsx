@@ -4,6 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../../validation';
 import { Button } from '../Button/Button';
 import classes from './Form.module.scss';
+import { Textarea } from '../Textarea/Textarea';
+
+/* 
+SlPaperClip
+*/
 
 function Form() {
   const {
@@ -12,7 +17,7 @@ function Form() {
     reset,
     formState: { errors, isValid },
   } = useForm({
-    mode: 'onBlur',
+    mode: 'onTouched',
     resolver: yupResolver(validationSchema),
   });
 
@@ -37,14 +42,14 @@ function Form() {
             register={register}
             name="from.name"
             placeholder="Имя"
-            error={errors?.from?.name}
+            error={errors.from?.name}
           />
           <Input
             type="email"
             register={register}
             name="from.email"
             placeholder="Email"
-            error={errors?.from?.email}
+            error={errors.from?.email}
           />
         </div>
       </label>
@@ -56,14 +61,14 @@ function Form() {
             register={register}
             name="to.name"
             placeholder="Имя"
-            error={errors?.to?.name}
+            error={errors.to?.name}
           />
           <Input
             type="email"
             register={register}
             name="mca.0"
             placeholder="Email"
-            error={errors?.mca?.[0]}
+            error={errors.mca?.[0]}
           />
         </div>
       </label>
@@ -74,9 +79,21 @@ function Form() {
           register={register}
           name="subject"
           placeholder="Тема письма"
-          error={errors?.subject}
+          error={errors.subject}
         />
       </label>
+      <label>
+        <span>Сообщение</span>
+        <Textarea
+          name="message.text"
+          placeholder="Напишите что-нибудь..."
+          register={register}
+        />
+      </label>
+      <div>
+        <i className="icon-paperclip"></i>
+        <input type="file" />
+      </div>
       <Button type="submit" label="Отправить" disabled={!isValid} />
     </form>
   );

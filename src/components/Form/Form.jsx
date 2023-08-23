@@ -26,10 +26,6 @@ function Form() {
   const [isUpload, setIsUpload] = useState(false);
   const uploadFileRef = useRef();
 
-  const openUploadArea = () => {
-    setIsUpload(true);
-  };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -100,7 +96,7 @@ function Form() {
         onMouseDown={(e) => e.preventDefault()}
         onClick={(e) => {
           e.preventDefault();
-          openUploadArea();
+          setIsUpload(true);
         }}
       >
         <i className="icon-paperclip"></i>
@@ -108,6 +104,12 @@ function Form() {
       </a>
       {isUpload && (
         <div className={classes.upload__area}>
+          <button
+            className={classes.upload__closed}
+            onClick={() => setIsUpload(false)}
+          >
+            <i className="icon-close"></i>
+          </button>
           <div>
             <h3>Бросайте файлы сюда, я ловлю</h3>
             <p>

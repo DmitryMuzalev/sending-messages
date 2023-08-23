@@ -62,3 +62,18 @@
     font-weight: var(--fw-normal);
   }
 }
+
+.upload__closed {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 0.313rem;
+  right: 0.313rem;
+
+  i {
+    font-size: 2rem;
+    color: var(--grey-light);
+  }
+}

@@ -5,10 +5,7 @@ import { validationSchema } from '../../validation';
 import { Button } from '../Button/Button';
 import classes from './Form.module.scss';
 import { Textarea } from '../Textarea/Textarea';
-
-/* 
-SlPaperClip
-*/
+import { useRef, useState } from 'react';
 
 function Form() {
   const {
@@ -24,6 +21,13 @@ function Form() {
   const onSubmit = (letter) => {
     console.log(letter);
     reset();
+  };
+
+  const [isUpload, setIsUpload] = useState(false);
+  const uploadFileRef = useRef();
+
+  const openUploadArea = () => {
+    setIsUpload(true);
   };
 
   return (
@@ -90,10 +94,47 @@ function Form() {
           register={register}
         />
       </label>
-      <div>
+      <a
+        href="#upload-file"
+        className={classes.upload__link}
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={(e) => {
+          e.preventDefault();
+          openUploadArea();
+        }}
+      >
         <i className="icon-paperclip"></i>
-        <input type="file" />
-      </div>
+        <span>Прикрепить файл</span>
+      </a>
+      {isUpload && (
+        <div className={classes.upload__area}>
+          <div>
+            <h3>Бросайте файлы сюда, я ловлю</h3>
+            <p>
+              Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls,
+              pdf) и zip-архивы. <br /> Размеры файла до 5 МБ
+            </p>
+          </div>
+          <span>или</span>
+          <div>
+            <input
+              type="file"
+              {...register('files')}
+              multiple
+              hidden
+              ref={uploadFileRef}
+            />
+            <button
+              className="btn"
+              type="button"
+              onClick={() => uploadFileRef.current.click()}
+            >
+              Выберите файлы
+            </button>
+          </div>
+        </div>
+      )}
+
       <Button type="submit" label="Отправить" disabled={!isValid} />
     </form>
   );

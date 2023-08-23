@@ -66,6 +66,8 @@ body {
   flex-direction: column;
   margin: 0 auto;
   width: 50rem;
+  //!test
+  padding-bottom: 50px;
 }
 
 label {
@@ -77,5 +79,35 @@ label {
   }
   div {
     display: flex;
+  }
+}
+
+.btn {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  height: 2.5rem;
+  padding: 0 1.563rem;
+  line-height: 1.875rem;
+  font-size: 1.125rem;
+  color: var(--white);
+  background: var(--btn-bg);
+  border-radius: var(--radius);
+
+  &:disabled {
+    cursor: not-allowed;
+    background: var(--grey-middle);
+  }
+
+  &:focus {
+    outline: 2px solid var(--blue-light);
+  }
+
+  &:not([disabled]):hover {
+    background: var(--btn-hover-bg);
+  }
+
+  &:not([disabled]):active {
+    background: var(--btn-active-bg);
   }
 }

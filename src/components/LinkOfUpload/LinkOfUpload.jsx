@@ -1,6 +1,9 @@
+import { useDispatch } from 'react-redux';
 import classes from '../Form/Form.module.scss';
+import { toggleIsUpload } from '../../redux/slices/uploadFilesSlice';
 
 function LinkOfUpload() {
+  const dispatch = useDispatch();
   return (
     <a
       href="#upload-file"
@@ -8,7 +11,7 @@ function LinkOfUpload() {
       onMouseDown={(e) => e.preventDefault()}
       onClick={(e) => {
         e.preventDefault();
-        openUploadArea();
+        dispatch(toggleIsUpload());
       }}
     >
       <i className="icon-paperclip"></i>

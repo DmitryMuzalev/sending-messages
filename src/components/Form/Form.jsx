@@ -5,9 +5,15 @@ import { validationSchema } from '../../validation';
 import { Button } from '../Button/Button';
 import classes from './Form.module.scss';
 import { Textarea } from '../Textarea/Textarea';
-import { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUploadFiles } from '../../redux/slices/uploadFilesSlice';
+import { UploadArea } from '../uploadArea/uploadArea';
+import { LinkOfUpload } from '../LinkOfUpload/LinkOfUpload';
+import { Label } from '../Label/Label';
 
 function Form() {
+  const { isUpload } = useSelector(selectUploadFiles);
+
   const {
     register,
     handleSubmit,
@@ -17,14 +23,10 @@ function Form() {
     mode: 'onTouched',
     resolver: yupResolver(validationSchema),
   });
-
   const onSubmit = (letter) => {
     console.log(letter);
     reset();
   };
-
-  const [isUpload, setIsUpload] = useState(false);
-  const uploadFileRef = useRef();
 
   return (
     <form
@@ -34,8 +36,7 @@ function Form() {
       className={classes.form}
     >
       <h2>Отправлялка сообщений</h2>
-      <label>
-        <span>От кого</span>
+      <Label label="От кого">
         <div>
           <Input
             type="text"
@@ -52,9 +53,8 @@ function Form() {
             error={errors.from?.email}
           />
         </div>
-      </label>
-      <label>
-        <span>Кому</span>
+      </Label>
+      <Label label="Кому">
         <div>
           <Input
             type="text"
@@ -71,9 +71,8 @@ function Form() {
             error={errors.mca?.[0]}
           />
         </div>
-      </label>
-      <label>
-        <span>Тема письма</span>
+      </Label>
+      <Label label="Тема письма">
         <Input
           type="text"
           register={register}
@@ -81,63 +80,18 @@ function Form() {
           placeholder="Тема письма"
           error={errors.subject}
         />
-      </label>
-      <label>
-        <span>Сообщение</span>
+      </Label>
+      <Label label="Сообщение">
         <Textarea
           name="message.text"
           placeholder="Напишите что-нибудь..."
           register={register}
         />
-      </label>
-      <a
-        href="#upload-file"
-        className={classes.upload__link}
-        onMouseDown={(e) => e.preventDefault()}
-        onClick={(e) => {
-          e.preventDefault();
-          setIsUpload(true);
-        }}
-      >
-        <i className="icon-paperclip"></i>
-        <span>Прикрепить файл</span>
-      </a>
-      {isUpload && (
-        <div className={classes.upload__area}>
-          <button
-            className={classes.upload__closed}
-            onClick={() => setIsUpload(false)}
-          >
-            <i className="icon-close"></i>
-          </button>
-          <div>
-            <h3>Бросайте файлы сюда, я ловлю</h3>
-            <p>
-              Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls,
-              pdf) и zip-архивы. <br /> Размеры файла до 5 МБ
-            </p>
-          </div>
-          <span>или</span>
-          <div>
-            <input
-              type="file"
-              {...register('files')}
-              multiple
-              hidden
-              ref={uploadFileRef}
-            />
-            <button
-              className="btn"
-              type="button"
-              onClick={() => uploadFileRef.current.click()}
-            >
-              Выберите файлы
-            </button>
-          </div>
-        </div>
-      )}
-
+      </Label>
+      <LinkOfUpload />
       <Button type="submit" label="Отправить" disabled={!isValid} />
+
+      {isUpload && <UploadArea register={register} />}
     </form>
   );
 }

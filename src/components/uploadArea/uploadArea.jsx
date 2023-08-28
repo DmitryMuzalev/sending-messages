@@ -1,17 +1,24 @@
 import { useDispatch } from 'react-redux';
 import classes from '../Form/Form.module.scss';
 import { addFiles, toggleIsUpload } from '../../redux/slices/uploadFilesSlice';
-import { useRef } from 'react';
+//import { useRef } from 'react';
 
-function UploadArea({ register }) {
+function UploadArea({ register, setSelectedFile }) {
   const dispatch = useDispatch();
-  const uploadFileRef = useRef();
+  // const uploadFileRef = useRef();
 
-  const handelChange = (e) => {
+  /*  const handelChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       const newFiles = [...e.target.files];
       dispatch(addFiles(newFiles));
     }
+  };
+*/
+
+  const handlerUploadFile = (e) => {
+    console.log(e.target.files[0]);
+    setSelectedFile(e.target.files[0]);
+    dispatch(toggleIsUpload());
   };
 
   return (
@@ -30,7 +37,8 @@ function UploadArea({ register }) {
         </p>
       </div>
       <span>или</span>
-      <div>
+      <input type="file" {...register('file')} onChange={handlerUploadFile} />
+      {/*   <div>
         <input
           type="file"
           {...register('files')}
@@ -46,7 +54,7 @@ function UploadArea({ register }) {
         >
           Выберите файлы
         </button>
-      </div>
+      </div>*/}
     </div>
   );
 }

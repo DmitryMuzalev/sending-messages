@@ -5,15 +5,25 @@ import { validationSchema } from '../../validation';
 import { Button } from '../Button/Button';
 import classes from './Form.module.scss';
 import { Textarea } from '../Textarea/Textarea';
-import { useSelector } from 'react-redux';
-import { selectUploadFiles } from '../../redux/slices/uploadFilesSlice';
-import { UploadArea } from '../uploadArea/uploadArea';
-import { LinkOfUpload } from '../LinkOfUpload/LinkOfUpload';
+//import { useSelector } from 'react-redux';
+//import { selectUploadFiles } from '../../redux/slices/uploadFilesSlice';
+//import { UploadArea } from '../uploadArea/uploadArea';
+//import { LinkOfUpload } from '../LinkOfUpload/LinkOfUpload';
 import { Label } from '../Label/Label';
+import { useState } from 'react';
+//import { useState } from 'react';
 
 function Form() {
-  const { isUpload } = useSelector(selectUploadFiles);
+  // const { isUpload } = useSelector(selectUploadFiles);
+  const [files, setFiles] = useState([]);
 
+  const handleUploadFiles = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setFiles([...e.target.files]);
+    }
+  };
+
+  console.log(files);
   const {
     register,
     handleSubmit,
@@ -24,7 +34,8 @@ function Form() {
     resolver: yupResolver(validationSchema),
   });
   const onSubmit = (letter) => {
-    console.log(letter);
+    const data = { ...letter, files: files };
+    console.log(data);
     reset();
   };
 
@@ -88,10 +99,43 @@ function Form() {
           register={register}
         />
       </Label>
-      <LinkOfUpload />
+      {/*      <LinkOfUpload />*/}
+
+      {!!files.length && (
+        <ul className={classes.upload__list}>
+          {files.map((file) => {
+            const format = file.name.match(/\.[0-9a-z]+$/i)[0];
+            console.log(format);
+            return (
+              <li key={file.name}>
+                <div className={classes.upload__file}>
+                  <p>
+                    <i className="icon-paperclip"></i>
+                    {file.name}
+                  </p>
+                  <button>
+                    <i className="icon-trash"></i> Удалить
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+
+      <input
+        type="file"
+        name="files"
+        accept=".png, .jpg, .jpeg, .doc, .docx, .xls, .xlsx, .pdf, .zip, .rar, .7zip"
+        multiple
+        onChange={handleUploadFiles}
+      />
+
       <Button type="submit" label="Отправить" disabled={!isValid} />
 
-      {isUpload && <UploadArea register={register} />}
+      {/*   {isUpload && (
+        <UploadArea register={register} setSelectedFile={setSelectedFile} />
+      )}*/}
     </form>
   );
 }

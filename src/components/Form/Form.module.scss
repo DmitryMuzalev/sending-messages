@@ -77,3 +77,40 @@
     color: var(--grey-light);
   }
 }
+
+.upload__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.625rem;
+  list-style: none;
+}
+
+.upload__file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--grey-light);
+  border-radius: var(--radius);
+  padding: 0.625rem;
+
+  p {
+    i {
+      padding-right: 1rem;
+    }
+    max-width: 250px;
+    padding-right: 1rem;
+    font-size: 1rem;
+    color: var(--black);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  button {
+    flex-shrink: 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: var(--red);
+  }
+}

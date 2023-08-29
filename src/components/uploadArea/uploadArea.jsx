@@ -1,24 +1,17 @@
 import { useDispatch } from 'react-redux';
 import classes from '../Form/Form.module.scss';
 import { addFiles, toggleIsUpload } from '../../redux/slices/uploadFilesSlice';
-//import { useRef } from 'react';
+import { useRef } from 'react';
 
-function UploadArea({ register, setSelectedFile }) {
+function UploadArea() {
   const dispatch = useDispatch();
-  // const uploadFileRef = useRef();
+  const uploadFileRef = useRef();
 
-  /*  const handelChange = (e) => {
+  const handleUploadFiles = (e) => {
     if (e.target.files && e.target.files[0]) {
-      const newFiles = [...e.target.files];
-      dispatch(addFiles(newFiles));
+      dispatch(addFiles([...e.target.files]));
+      dispatch(toggleIsUpload());
     }
-  };
-*/
-
-  const handlerUploadFile = (e) => {
-    console.log(e.target.files[0]);
-    setSelectedFile(e.target.files[0]);
-    dispatch(toggleIsUpload());
   };
 
   return (
@@ -37,25 +30,27 @@ function UploadArea({ register, setSelectedFile }) {
         </p>
       </div>
       <span>или</span>
-      <input type="file" {...register('file')} onChange={handlerUploadFile} />
-      {/*   <div>
-        <input
-          type="file"
-          {...register('files')}
-          multiple
-          hidden
-          ref={uploadFileRef}
-          onChange={handelChange}
-        />
-        <button
-          className="btn"
-          type="button"
-          onClick={() => uploadFileRef.current.click()}
-        >
-          Выберите файлы
-        </button>
-      </div>*/}
+      <input
+        type="file"
+        name="files"
+        accept=".png, .jpg, .jpeg, .doc, .docx, .xls, .xlsx, .pdf, .zip, .rar, .7zip"
+        multiple
+        hidden
+        onChange={handleUploadFiles}
+        ref={uploadFileRef}
+      />
+      <button
+        className="btn"
+        type="button"
+        onClick={() => uploadFileRef.current.click()}
+      >
+        Выберите файлы
+      </button>
     </div>
   );
 }
 export { UploadArea };
+/* 
+
+    
+*/

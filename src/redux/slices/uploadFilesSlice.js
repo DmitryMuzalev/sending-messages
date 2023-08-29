@@ -12,6 +12,9 @@ export const uploadFilesSlice = createSlice({
     addFiles: (state, action) => {
       state.files = [...state.files, ...action.payload];
     },
+    removeFile: (state, action) => {
+      state.files = state.files.filter((file) => file.name !== action.payload);
+    },
 
     toggleIsUpload: (state) => {
       state.isUpload = !state.isUpload;
@@ -19,7 +22,8 @@ export const uploadFilesSlice = createSlice({
   },
 });
 
-export const { addFiles, toggleIsUpload } = uploadFilesSlice.actions;
+export const { addFiles, removeFile, toggleIsUpload } =
+  uploadFilesSlice.actions;
 
 export const selectUploadFiles = (state) => state.uploadFiles;
 

@@ -5,23 +5,18 @@ import { validationSchema } from '../../validation';
 import { Button } from '../Button/Button';
 import classes from './Form.module.scss';
 import { Textarea } from '../Textarea/Textarea';
-//import { useSelector } from 'react-redux';
-//import { selectUploadFiles } from '../../redux/slices/uploadFilesSlice';
-//import { UploadArea } from '../uploadArea/uploadArea';
-//import { LinkOfUpload } from '../LinkOfUpload/LinkOfUpload';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  removeFile,
+  selectUploadFiles,
+} from '../../redux/slices/uploadFilesSlice';
+import { UploadArea } from '../uploadArea/uploadArea';
+import { LinkOfUpload } from '../LinkOfUpload/LinkOfUpload';
 import { Label } from '../Label/Label';
-import { useState } from 'react';
-//import { useState } from 'react';
 
 function Form() {
-  // const { isUpload } = useSelector(selectUploadFiles);
-  const [files, setFiles] = useState([]);
-
-  const handleUploadFiles = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setFiles([...e.target.files]);
-    }
-  };
+  const dispatch = useDispatch();
+  const { files, isUpload } = useSelector(selectUploadFiles);
 
   const {
     register,
@@ -98,21 +93,23 @@ function Form() {
           register={register}
         />
       </Label>
-      {/*<LinkOfUpload />*/}
-
       {!!files.length && (
         <ul className={classes.upload__list}>
-          {files.map((file) => {
+          {files.map((file, index) => {
+            console.log(files);
             const [name, format] = file.name.split('.');
             return (
-              <li key={file.name}>
+              <li key={index}>
                 <div className={classes.upload__file}>
                   <div>
                     <i className="icon-paperclip"></i>
                     <p>{name}</p>
                     <span>{`.${format}`}</span>
                   </div>
-                  <button>
+                  <button
+                    type="button"
+                    onClick={() => dispatch(removeFile(file.name))}
+                  >
                     <i className="icon-trash"></i>Удалить
                   </button>
                 </div>
@@ -121,20 +118,9 @@ function Form() {
           })}
         </ul>
       )}
-
-      <input
-        type="file"
-        name="files"
-        accept=".png, .jpg, .jpeg, .doc, .docx, .xls, .xlsx, .pdf, .zip, .rar, .7zip"
-        multiple
-        onChange={handleUploadFiles}
-      />
-
+      <LinkOfUpload />
       <Button type="submit" label="Отправить" disabled={!isValid} />
-
-      {/*   {isUpload && (
-        <UploadArea register={register} setSelectedFile={setSelectedFile} />
-      )}*/}
+      {isUpload && <UploadArea />}
     </form>
   );
 }

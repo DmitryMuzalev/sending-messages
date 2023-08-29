@@ -89,28 +89,40 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.625rem;
+  column-gap: 0.938rem;
   border: 1px solid var(--grey-light);
   border-radius: var(--radius);
-  padding: 0.625rem;
+  overflow: hidden;
 
-  p {
+  div {
+    display: flex;
+    align-items: center;
+
     i {
-      padding-right: 1rem;
+      font-size: 1.875rem;
+      color: var(--grey);
+      padding-right: 0.938rem;
     }
-    max-width: 250px;
-    padding-right: 1rem;
-    font-size: 1rem;
-    color: var(--black);
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    p {
+      max-width: 170px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
   button {
-    flex-shrink: 0;
     cursor: pointer;
-    background: none;
-    border: none;
-    font-size: 1rem;
+    align-self: center;
     color: var(--red);
+    font-size: 1rem;
+    border: none;
+    i {
+      padding-right: 0.313rem;
+    }
   }
 }
+
+/* 
+   
+*/

@@ -23,7 +23,6 @@ function Form() {
     }
   };
 
-  console.log(files);
   const {
     register,
     handleSubmit,
@@ -99,22 +98,22 @@ function Form() {
           register={register}
         />
       </Label>
-      {/*      <LinkOfUpload />*/}
+      {/*<LinkOfUpload />*/}
 
       {!!files.length && (
         <ul className={classes.upload__list}>
           {files.map((file) => {
-            const format = file.name.match(/\.[0-9a-z]+$/i)[0];
-            console.log(format);
+            const [name, format] = file.name.split('.');
             return (
               <li key={file.name}>
                 <div className={classes.upload__file}>
-                  <p>
+                  <div>
                     <i className="icon-paperclip"></i>
-                    {file.name}
-                  </p>
+                    <p>{name}</p>
+                    <span>{`.${format}`}</span>
+                  </div>
                   <button>
-                    <i className="icon-trash"></i> Удалить
+                    <i className="icon-trash"></i>Удалить
                   </button>
                 </div>
               </li>

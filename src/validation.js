@@ -25,3 +25,15 @@ export const validationSchema = Yup.object({
   mca: Yup.array().of(emailFieldValidScheme),
   subject: subjectFieldValidScheme,
 });
+
+const DEFAULT_MAX_SIZE_IN_BYTES = 1048576 * 5; // 5Мб
+export const validationFileSize = (name, size) => {
+  const maxSizeInBytes = DEFAULT_MAX_SIZE_IN_BYTES;
+  if (size > maxSizeInBytes) {
+    alert(
+      `Ошибка при загрузки файла с именем: ${name}. Файл должен быть до 5 МБ.`
+    );
+    return false;
+  }
+  return true;
+};

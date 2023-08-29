@@ -14,8 +14,20 @@ function UploadArea() {
     }
   };
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      dispatch(addFiles([...e.dataTransfer.files]));
+      dispatch(toggleIsUpload());
+    }
+  };
+
   return (
-    <div className={classes.upload__area}>
+    <div
+      className={classes.upload__area}
+      onDrop={handleDrop}
+      onDragOver={(e) => e.preventDefault()}
+    >
       <button
         className={classes.upload__closed}
         onClick={() => dispatch(toggleIsUpload())}

@@ -96,15 +96,18 @@ function Form() {
       {!!files.length && (
         <ul className={classes.upload__list}>
           {files.map((file, index) => {
-            console.log(files);
-            const [name, format] = file.name.split('.');
+            const indexPoint = file.name.lastIndexOf('.');
+            const [name, format] = [
+              file.name.slice(0, indexPoint + 1),
+              file.name.slice(indexPoint),
+            ];
             return (
               <li key={index}>
                 <div className={classes.upload__file}>
                   <div>
                     <i className="icon-paperclip"></i>
                     <p>{name}</p>
-                    <span>{`.${format}`}</span>
+                    <span>{format}</span>
                   </div>
                   <button
                     type="button"

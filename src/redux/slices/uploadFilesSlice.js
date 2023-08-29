@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { validationFileSize } from '../../validation';
 
 const initialState = {
   isUpload: false,
@@ -10,7 +11,11 @@ export const uploadFilesSlice = createSlice({
   initialState,
   reducers: {
     addFiles: (state, action) => {
-      state.files = [...state.files, ...action.payload];
+      const data = [...action.payload].filter((file) =>
+        validationFileSize(file.name, file.size)
+      );
+
+      state.files = [...state.files, ...data];
     },
     removeFile: (state, action) => {
       state.files = state.files.filter((file) => file.name !== action.payload);

@@ -61,6 +61,12 @@ body {
   background-color: var(--bg-color);
 }
 
+h2 {
+  font-size: 1.875rem;
+  font-weight: var(--fw-normal);
+  line-height: 2.5rem;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -109,5 +115,40 @@ label {
 
   &:not([disabled]):active {
     background: var(--btn-active-bg);
+  }
+}
+
+.sent_letters {
+  padding: 1.875rem;
+  margin-top: 2.5rem;
+  h2 {
+    margin-bottom: 1.25rem;
+  }
+  table {
+    width: 100%;
+    th {
+      border-bottom: 1px solid var(--grey-light);
+      color: var(--grey-dark);
+      font-weight: var(--fw-normal);
+      text-align: left;
+      line-height: 1.563;
+      padding-bottom: 0.625rem;
+    }
+    th,
+    td {
+      &:last-child {
+        text-align: right;
+      }
+    }
+    td {
+      color: var(--black);
+      padding: 0.625rem 0 0.438rem 0;
+      &:nth-child(2) {
+        max-width: 340px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
   }
 }

@@ -1,18 +1,24 @@
-import { useForm } from 'react-hook-form';
-import { Input } from '../Input/Input';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { validationSchema } from '../../validation';
-import { Button } from '../Button/Button';
 import classes from './Form.module.scss';
-import { Textarea } from '../Textarea/Textarea';
+
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { validationSchema } from '../../validation';
 import {
-  removeFile,
+  removeFiles,
   selectUploadFiles,
 } from '../../redux/slices/uploadFilesSlice';
-import { UploadArea } from '../uploadArea/uploadArea';
-import { LinkOfUpload } from '../LinkOfUpload/LinkOfUpload';
-import { Label } from '../Label/Label';
+
+import { Label } from './Label/Label';
+
+import { Input } from './Input/Input';
+import { Textarea } from './Textarea/Textarea';
+import { Button } from '../Button/Button';
+
+import { LinkOfUpload } from '../FilePicker/LinkOfUpload';
+import { ListUploadedFiles } from '../FilePicker/ListUploadedFiles';
+import { UploadArea } from '../FilePicker/UploadArea';
 
 function Form() {
   const dispatch = useDispatch();
@@ -27,9 +33,11 @@ function Form() {
     mode: 'onTouched',
     resolver: yupResolver(validationSchema),
   });
+
   const onSubmit = (letter) => {
     const data = { ...letter, files: files };
     console.log(data);
+    dispatch(removeFiles());
     reset();
   };
 
@@ -93,34 +101,7 @@ function Form() {
           register={register}
         />
       </Label>
-      {!!files.length && (
-        <ul className={classes.upload__list}>
-          {files.map((file, index) => {
-            const indexPoint = file.name.lastIndexOf('.');
-            const [name, format] = [
-              file.name.slice(0, indexPoint + 1),
-              file.name.slice(indexPoint),
-            ];
-            return (
-              <li key={index}>
-                <div className={classes.upload__file}>
-                  <div>
-                    <i className="icon-paperclip"></i>
-                    <p>{name}</p>
-                    <span>{format}</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => dispatch(removeFile(file.name))}
-                  >
-                    <i className="icon-trash"></i>Удалить
-                  </button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      {!!files.length && <ListUploadedFiles />}
       <LinkOfUpload />
       <Button type="submit" label="Отправить" disabled={!isValid} />
       {isUpload && <UploadArea />}

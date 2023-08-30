@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import classes from '../Form/Form.module.scss';
+import classes from './FilePicker.module.scss';
 import { toggleIsUpload } from '../../redux/slices/uploadFilesSlice';
 
 function LinkOfUpload() {

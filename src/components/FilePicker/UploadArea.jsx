@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import classes from '../Form/Form.module.scss';
+import classes from './FilePicker.module.scss';
 import { addFiles, toggleIsUpload } from '../../redux/slices/uploadFilesSlice';
 import { useRef } from 'react';
 
@@ -62,7 +62,3 @@ function UploadArea() {
   );
 }
 export { UploadArea };
-/* 
-
-    
-*/

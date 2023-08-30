@@ -1,4 +1,7 @@
 import * as Yup from 'yup';
+import { destructFileName } from './functions';
+
+//_Validation for form fields:
 const emailFieldValidScheme = Yup.string()
   .required('Поле "Email" не может быть пустым')
   .matches(
@@ -26,14 +29,23 @@ export const validationSchema = Yup.object({
   subject: subjectFieldValidScheme,
 });
 
-const DEFAULT_MAX_SIZE_IN_BYTES = 1048576 * 5; // 5Мб
-export const validationFileSize = (name, size) => {
-  const maxSizeInBytes = DEFAULT_MAX_SIZE_IN_BYTES;
-  if (size > maxSizeInBytes) {
+//_Validation of uploaded files:
+export const validationUploadedFiles = (file, validFormats, maxSize) => {
+  const [name, format] = destructFileName(file.name);
+
+  if (!validFormats.includes(format)) {
+    alert(
+      `Ошибка при загрузки файла с именем: ${name}. Формат данного файла не поддерживается.`
+    );
+    return false;
+  }
+
+  if (file.size >= maxSize) {
     alert(
       `Ошибка при загрузки файла с именем: ${name}. Файл должен быть до 5 МБ.`
     );
     return false;
   }
+
   return true;
 };

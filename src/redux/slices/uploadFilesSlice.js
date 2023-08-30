@@ -1,9 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { validationFileSize } from '../../validation';
+import { validationUploadedFiles } from '../../validation';
 
 const initialState = {
   isUpload: false,
   files: [],
+  validFormats: [
+    '.png',
+    '.jpg',
+    '.jpeg',
+    '.doc',
+    '.docx',
+    '.xls',
+    '.xlsx',
+    '.pdf',
+    '.zip',
+    '.rar',
+    '.7zip',
+  ],
+  maxSizeInBytes: 1048576 * 5,
 };
 
 export const uploadFilesSlice = createSlice({
@@ -11,13 +25,16 @@ export const uploadFilesSlice = createSlice({
   initialState,
   reducers: {
     addFiles: (state, action) => {
+      const { maxSizeInBytes, validFormats } = state;
       const data = [...action.payload].filter((file) =>
-        validationFileSize(file.name, file.size)
+        validationUploadedFiles(file, validFormats, maxSizeInBytes)
       );
-
       state.files = [...state.files, ...data];
     },
-    removeFile: (state, action) => {
+    removeFiles: (state) => {
+      state.files = [];
+    },
+    deleteFile: (state, action) => {
       state.files = state.files.filter((file) => file.name !== action.payload);
     },
 
@@ -27,7 +44,7 @@ export const uploadFilesSlice = createSlice({
   },
 });
 
-export const { addFiles, removeFile, toggleIsUpload } =
+export const { addFiles, deleteFile, removeFiles, toggleIsUpload } =
   uploadFilesSlice.actions;
 
 export const selectUploadFiles = (state) => state.uploadFiles;

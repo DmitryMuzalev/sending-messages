@@ -5,7 +5,7 @@ function ListSentLetters() {
   const { letters } = useSelector(selectSentLetters);
 
   return (
-    <div className="sent_letters">
+    <footer className="sent_letters">
       <h2>Отправленные сообщения</h2>
 
       {letters.length ? (
@@ -36,7 +36,7 @@ function ListSentLetters() {
       ) : (
         <p>Сообщения ещё не отправлялись</p>
       )}
-    </div>
+    </footer>
   );
 }
 

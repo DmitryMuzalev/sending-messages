@@ -67,6 +67,14 @@ h2 {
   line-height: 2.5rem;
 }
 
+main {
+  position: relative;
+  padding: 1.875rem;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  background-color: var(--white);
+}
+
 .app {
   display: flex;
   flex-direction: column;

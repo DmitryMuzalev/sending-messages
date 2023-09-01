@@ -19,7 +19,10 @@ import { Button } from '../Button/Button';
 import { LinkOfUpload } from '../FilePicker/LinkOfUpload';
 import { ListUploadedFiles } from '../FilePicker/ListUploadedFiles';
 import { UploadArea } from '../FilePicker/UploadArea';
-import { addMessage } from '../../redux/slices/sentLettersSlice';
+import {
+  addMessage,
+  toggleStatusSent,
+} from '../../redux/slices/sentLettersSlice';
 
 function Form() {
   const dispatch = useDispatch();
@@ -39,6 +42,7 @@ function Form() {
     const data = { ...letter, files: files, date: new Date() };
     dispatch(addMessage(data));
     dispatch(removeFiles());
+    dispatch(toggleStatusSent());
     reset();
   };
 

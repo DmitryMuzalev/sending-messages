@@ -1,13 +1,7 @@
 .form {
-  position: relative;
   display: flex;
   flex-direction: column;
   row-gap: 1.25rem;
-  padding: 1.875rem;
-  box-shadow: var(--shadow);
-  border-radius: var(--radius);
-  background-color: var(--white);
-
   button {
     align-self: start;
   }

@@ -1,0 +1,12 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  text-align: center;
+  gap: 0.625rem;
+  p {
+    margin-bottom: 1.25rem;
+  }
+}

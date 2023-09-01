@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/sending-messages/static/css/main.f0227b47.css",
+    "main.js": "/sending-messages/static/js/main.12124d8a.js",
+    "static/media/icon.svg?fpltun": "/sending-messages/static/media/icon.dde1eee2a9af3d52d371.svg",
+    "static/media/icon.eot?fpltun": "/sending-messages/static/media/icon.63c5a75308a470f15462.eot",
+    "static/media/icon.woff?fpltun": "/sending-messages/static/media/icon.edb77b57591898ba2ee7.woff",
+    "static/media/icon.ttf?fpltun": "/sending-messages/static/media/icon.366596115c5042ddcd62.ttf",
+    "index.html": "/sending-messages/index.html",
+    "main.f0227b47.css.map": "/sending-messages/static/css/main.f0227b47.css.map",
+    "main.12124d8a.js.map": "/sending-messages/static/js/main.12124d8a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f0227b47.css",
+    "static/js/main.12124d8a.js"
+  ]
+}
